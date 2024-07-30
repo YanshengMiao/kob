@@ -1,42 +1,20 @@
 <template>
-<div>
-  <div>Bot昵称：{{ bot_name }}</div>
-  <div>Bot战力：{{ bot_rating }}</div>
-</div>
+ <NavBar />
   <router-view/>
 </template>
 
 <script>
 //脚本部分可直接使用js注释语法
 
-//这是ajax
-import $ from 'jquery';
-//定义两个变量
-import { ref } from 'vue';
+import NavBar from './components/NavBar.vue'
+import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap/dist/js/bootstrap"  //js里单双引号一样
+
 export default {
-  name: "App",
-  //setup是整个函数的入口
-  setup: () => {
-    let bot_name = ref("");
-    let bot_rating = ref("");
-
-    $.ajax({
-      url: "http://localhost:3000/pk/getbotinfo/",
-      type: "get", //get:获取数据 post:创建数据
-      success: resp => {
-        console.log(resp); //CORS:跨域问题（引用的port跟当前port不一样导致）
-        bot_name.value = resp.name;
-        bot_rating.value = resp.rating;
-      }
-    });
-
-    return {
-      bot_name,
-      bot_rating
-    }
+  components: {
+    NavBar
   }
 }
-
 </script>
 
 
